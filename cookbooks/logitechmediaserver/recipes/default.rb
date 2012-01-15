@@ -19,7 +19,7 @@
 
 apt_repository "slimdevices" do
   uri "http://debian.slimdevices.com/"
-  components [ "main", "stable" ]
+  components [ "stable", "main" ]
   action :add
 end
 
@@ -28,14 +28,14 @@ if node["kernel"]["machine"] == "x86_64"
   package "libc6-i386"
 end
 
-# remove the legacy ones
-%w{ "squeezecenter" "squeezeboxserver" }.each do |p|
-  package p do
-    action :purge
-  end
+package "logitechmediaserver" do
+  action :install
+  # package is unsigned
+  options "--force-yes"
 end
 
-package "logitechmediaserver"
-
 service "logitechmediaserver" do
+  supports :restart => true
+  pattern "/usr/sbin/squeezeboxserver"
+  action [ :enable, :start ]
 end
