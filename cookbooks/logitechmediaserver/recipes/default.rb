@@ -16,3 +16,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+apt_repository "slimdevices" do
+  uri "http://debian.slimdevices.com/"
+  components [ "main", "stable" ]
+  action :add
+end
+
+# x64 package is missing a dependency on libc6-i386
+if node["kernel"]["machine"] == "x86_64"
+  package "libc6-i386"
+end
+
+# remove the legacy ones
+%w{ "squeezecenter" "squeezeboxserver" }.each do |p|
+  package p do
+    action :purge
+  end
+end
+
+package "logitechmediaserver"
+
+service "logitechmediaserver" do
+end
