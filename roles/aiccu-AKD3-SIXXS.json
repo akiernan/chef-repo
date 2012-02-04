@@ -1,0 +1,20 @@
+{
+  "name": "aiccu-AKD3-SIXXS",
+  "default_attributes": {
+  },
+  "json_class": "Chef::Role",
+  "env_run_lists": {
+  },
+  "run_list": [
+    "recipe[aiccu]"
+  ],
+  "description": "",
+  "chef_type": "role",
+  "override_attributes": {
+    "aiccu": {
+      "protocol": "tic",
+      "server": "tic.sixxs.net",
+      "tunnel_id": "T23400"
+    }
+  }
+}
