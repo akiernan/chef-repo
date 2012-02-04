@@ -1,7 +1,7 @@
 Description
 ===========
 
-Installs and configures pppoe
+Installs and configures ppp
 
 Requirements
 ============

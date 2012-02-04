@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: pppoe
+# Cookbook Name:: ppp
 # Recipe:: default
 #
 # Copyright 2012, Alex Kiernan
@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-package "pppoe" do
+package "ppp" do
   action :install
 end
 
