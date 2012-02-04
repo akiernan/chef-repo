@@ -1,0 +1,10 @@
+interface eth0 {
+   AdvSendAdvert on;
+   AdvOtherConfigFlag on;
+   prefix 2a01:348:12c::/64 {
+        AdvOnLink on;
+        AdvAutonomous on;
+        AdvValidLifetime 2592000;
+        AdvPreferredLifetime 604800;
+   };
+};
