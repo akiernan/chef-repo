@@ -25,8 +25,10 @@ service "radvd" do
   action :enable
 end
 
+include_recipe "sysctl"
+
 template "/etc/radvd.conf" do
-  template "radvd.conf.erb"
+  source "radvd.conf.erb"
   owner "root"
   group "root"
   mode 0644
