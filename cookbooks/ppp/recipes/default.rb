@@ -32,6 +32,8 @@ end
 
 template "/etc/ppp/chap-secrets" do
   source "chap-secrets.erb"
+  owner "root"
+  group "root"
   mode 0600
   variables({:chap_secrets => chap_secrets})
 end
