@@ -25,7 +25,6 @@ chap_secrets = Array.new
 
 search("chap-secrets", '*:*') do |c|
   chap_secret = Chef::EncryptedDataBagItem.load("chap-secrets", c["id"])
-  Chef::Log.info chap_secret['client']
   chap_secrets << { :client => chap_secret['client'],
                     :server => chap_secret['server'],
                     :secret => chap_secret['secret'] }
