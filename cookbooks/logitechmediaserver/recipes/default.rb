@@ -17,10 +17,13 @@
 # limitations under the License.
 #
 
-apt_repository "slimdevices" do
-  uri "http://debian.slimdevices.com/"
-  components [ "stable", "main" ]
-  action :add
+case node[:platform] 
+when "ubuntu","debian"
+  apt_repository "slimdevices" do
+    uri "http://debian.slimdevices.com/"
+    components [ "stable", "main" ]
+    action :add
+  end
 end
 
 # x64 package is missing a dependency on libc6-i386
@@ -29,7 +32,7 @@ if node["kernel"]["machine"] == "x86_64"
 end
 
 package "logitechmediaserver" do
-  action :install
+  action :upgrade
   # package is unsigned
   options "--force-yes"
 end
