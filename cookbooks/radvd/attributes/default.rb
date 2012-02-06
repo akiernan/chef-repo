@@ -17,4 +17,6 @@
 # limitations under the License.
 #
 
-default[:sysctl][:net][:ipv6][:conf][:all][:forwarding] = 1
+default["sysctl"]["net"]["ipv6"]["conf"]["all"]["forwarding"] = 1
+default["radvd"]["interface"] = "eth0"
+default["radvd"]["prefix"] = nil

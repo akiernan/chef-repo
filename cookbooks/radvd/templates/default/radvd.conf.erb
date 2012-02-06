@@ -1,7 +1,7 @@
-interface eth0 {
+interface <%= node["radvd"]["interface"] %> {
    AdvSendAdvert on;
    AdvOtherConfigFlag on;
-   prefix 2a01:348:12c::/64 {
+   prefix <%= node["radvd"]["prefix"] %> {
         AdvOnLink on;
         AdvAutonomous on;
         AdvValidLifetime 2592000;
