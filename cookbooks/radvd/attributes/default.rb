@@ -17,4 +17,4 @@
 # limitations under the License.
 #
 
-default[:sysctl][:net][:ipv6][:conf][:default][:forwarding] = 1
+default[:sysctl][:net][:ipv6][:conf][:all][:forwarding] = 1
