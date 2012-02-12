@@ -1,0 +1,12 @@
+<% if node["isc-dhcp"]["server6"]["authoritative"] %>
+authoritative;
+<% end %>
+<% if node["isc-dhcp"]["server6"]["domain-search"] %>
+option dhcp6.domain-search "<%= node["isc-dhcp"]["server6"]["domain-search"].join(",") %>";
+<% end %>
+<% if node["isc-dhcp"]["server6"]["name-servers"] %>
+option dhcp6.name-servers <%= node["isc-dhcp"]["server6"]["name-servers"].join(",") %>;
+<% end %>
+default-lease-time 1800;
+subnet6 <%= node["isc-dhcp"]["server6"]["prefix"] %> {
+}
