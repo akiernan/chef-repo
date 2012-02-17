@@ -18,6 +18,6 @@
 #
 
 default["isc-dhcp"]["server6"]["authoritative"] = true
-default["isc-dhcp"]["server6"]["domain-search"] = %w{alexandalex.com}
-default["isc-dhcp"]["server6"]["name-servers"] = %w{2a01:348:12c::}
-default["isc-dhcp"]["server6"]["prefix"] = "2a01:348:12c::/64"
+default["isc-dhcp"]["server6"]["domain-search"] = %w{}
+default["isc-dhcp"]["server6"]["name-servers"] = %w{}
+default["isc-dhcp"]["server6"]["prefix"] = ""

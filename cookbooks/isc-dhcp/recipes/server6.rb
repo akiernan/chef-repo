@@ -50,6 +50,7 @@ template "/etc/dhcp/dhcpd6.conf" do
   owner "root"
   group "root"
   mode 0644
+  notifies :restart, "service[isc-dhcp6-server]"
 end
 
 service "isc-dhcp6-server" do
