@@ -22,3 +22,10 @@ include_recipe "ppp"
 package "pppoe" do
   action :install
 end
+
+template "/etc/ppp/peers/dsl-provider" do
+  source "dsl-provider.erb"
+  owner "root"
+  group "dip"
+  mode 0640
+end
