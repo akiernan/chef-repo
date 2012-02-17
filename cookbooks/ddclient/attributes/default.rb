@@ -1,0 +1,5 @@
+default["ddclient"]["protocol"] = "dyndns2"
+default["ddclient"]["use"] = "if"
+default["ddclient"]["if"] = "ppp0"
+default["ddclient"]["server"] = "www.dnsdynamic.org"
+default["ddclient"]["host"] = "alexandalex.dnsdynamic.com"

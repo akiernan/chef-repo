@@ -17,6 +17,23 @@
 # limitations under the License.
 #
 
+ddclient_secret = Chef::EncryptedDataBagItem.load("secrets", "ddclient")
+
 package "ddclient" do
   action :upgrade
+end
+
+template "/etc/ddclient.conf" do
+  source "ddclient.conf.erb"
+  owner "root"
+  group "root"
+  mode 0600
+  variables(:ddclient_username => ddclient_secret['username'],
+            :ddclient_password => ddclient_secret['password'])
+  notifies :restart, "service[ddclient]"
+end
+
+service "ddclient" do
+  supports :status => true, :restart => true
+  action :enable
 end
