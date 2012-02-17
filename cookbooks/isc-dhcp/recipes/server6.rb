@@ -19,20 +19,30 @@
 
 include_recipe "isc-dhcp::server-base"
 
-cookbook_file "/etc/default/isc-dhcp6-server" do
-  source "isc-dhcp6-server.default"
-  owner "root"
-  group "root"
-  mode 0644
-  not_if "dpkg -S /etc/init.d/isc-dhcp6-server"
-end
+case node[:platform]
+when "ubuntu","debian"
+  cookbook_file "/etc/default/isc-dhcp6-server" do
+    source "isc-dhcp6-server.default"
+    owner "root"
+    group "root"
+    mode 0644
+    not_if "dpkg -S /etc/init.d/isc-dhcp6-server"
+  end
 
-cookbook_file "/etc/init.d/isc-dhcp6-server" do
-  source "isc-dhcp6-server.init"
-  owner "root"
-  group "root"
-  mode 0755
-  not_if "dpkg -S /etc/init.d/isc-dhcp6-server"
+  cookbook_file "/etc/init.d/isc-dhcp6-server" do
+    source "isc-dhcp6-server.init"
+    owner "root"
+    group "root"
+    mode 0755
+    not_if "dpkg -S /etc/init.d/isc-dhcp6-server"
+  end
+
+  file "/var/lib/dhcp/dhcpd6.leases" do
+    owner "dhcpd"
+    group "dhcpd"
+    mode 0644
+    action :create_if_missing
+  end
 end
 
 template "/etc/dhcp/dhcpd6.conf" do
@@ -40,13 +50,6 @@ template "/etc/dhcp/dhcpd6.conf" do
   owner "root"
   group "root"
   mode 0644
-end
-
-file "/var/lib/dhcp/dhcpd6.leases" do
-  owner "dhcpd"
-  group "dhcpd"
-  mode 0644
-  action :create_if_missing
 end
 
 service "isc-dhcp6-server" do
