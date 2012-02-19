@@ -20,4 +20,5 @@
 default["isc-dhcp"]["server6"]["authoritative"] = true
 default["isc-dhcp"]["server6"]["domain-search"] = %w{}
 default["isc-dhcp"]["server6"]["name-servers"] = %w{}
+default["isc-dhcp"]["server6"]["sntp-servers"] = %w{}
 default["isc-dhcp"]["server6"]["prefix"] = ""
