@@ -1,0 +1,25 @@
+<% if node["isc-dhcp"]["server"]["authoritative"] %>
+authoritative;
+<% end %>
+<% if !node["isc-dhcp"]["server"]["domain-search"].empty? %>
+option domain-search "<%= node["isc-dhcp"]["server"]["domain-search"].join(",") %>";
+<% end %>
+<% if !node["isc-dhcp"]["server"]["domain-name-servers"].empty? %>
+option domain-name-servers <%= node["isc-dhcp"]["server"]["domain-name-servers"].join(",") %>;
+<% end %>
+<% if !node["isc-dhcp"]["server"]["ntp-servers"].empty? %>
+option ntp-servers <%= node["isc-dhcp"]["server"]["ntp-servers"].join(",") %>;
+<% end %>
+default-lease-time 1800;
+
+option domain-name "alexandalex.com";
+
+subnet 192.168.1.0 netmask 255.255.255.0 {
+  option subnet-mask 255.255.255.0;
+  option broadcast-address 192.168.1.255;
+  option routers 192.168.1.63;
+  pool {
+    range 192.168.1.64 192.168.1.253;
+    allow all clients;
+  }
+}

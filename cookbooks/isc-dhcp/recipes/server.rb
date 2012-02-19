@@ -18,3 +18,15 @@
 #
 
 include_recipe "isc-dhcp::server-base"
+
+template "/etc/dhcp/dhcpd.conf" do
+  source "dhcpd.conf.erb"
+  owner "root"
+  group "dhcpd"
+  mode 0640
+  notifies :restart, "service[isc-dhcp-server]"
+end
+
+service "isc-dhcp-server" do
+  action [:enable, :start]
+end

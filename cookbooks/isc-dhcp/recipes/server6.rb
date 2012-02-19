@@ -26,7 +26,7 @@ when "ubuntu","debian"
     owner "root"
     group "root"
     mode 0644
-    not_if "dpkg -S /etc/init.d/isc-dhcp6-server"
+    not_if "dpkg -S /etc/dhcp/dhcpd6.conf"
   end
 
   cookbook_file "/etc/init.d/isc-dhcp6-server" do
@@ -34,7 +34,7 @@ when "ubuntu","debian"
     owner "root"
     group "root"
     mode 0755
-    not_if "dpkg -S /etc/init.d/isc-dhcp6-server"
+    not_if "dpkg -S /etc/dhcp/dhcpd6.conf"
   end
 
   file "/var/lib/dhcp/dhcpd6.leases" do
@@ -48,12 +48,11 @@ end
 template "/etc/dhcp/dhcpd6.conf" do
   source "dhcpd6.conf.erb"
   owner "root"
-  group "root"
-  mode 0644
+  group "dhcpd"
+  mode 0640
   notifies :restart, "service[isc-dhcp6-server]"
 end
 
 service "isc-dhcp6-server" do
   action [:enable, :start]
 end
-

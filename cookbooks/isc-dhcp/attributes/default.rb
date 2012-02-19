@@ -17,6 +17,11 @@
 # limitations under the License.
 #
 
+default["isc-dhcp"]["server"]["authoritative"] = true
+default["isc-dhcp"]["server"]["domain-search"] = %w{}
+default["isc-dhcp"]["server"]["domain-name-servers"] = %w{}
+default["isc-dhcp"]["server"]["ntp-servers"] = %w{}
+
 default["isc-dhcp"]["server6"]["authoritative"] = true
 default["isc-dhcp"]["server6"]["domain-search"] = %w{}
 default["isc-dhcp"]["server6"]["name-servers"] = %w{}
