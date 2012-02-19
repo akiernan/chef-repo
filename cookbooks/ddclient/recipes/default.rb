@@ -2,6 +2,8 @@
 # Cookbook Name:: ddclient
 # Recipe:: default
 #
+# Copyright 2010, RailsAnt, Inc.
+# Copyright 2011, Opscode, Inc.
 # Copyright 2012, Alex Kiernan
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,26 +16,33 @@
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
-# limitations under the License.
-#
+# 
 
 ddclient_secret = Chef::EncryptedDataBagItem.load("secrets", "ddclient")
 
 package "ddclient" do
-  action :upgrade
+  action :install
+end
+
+service "ddclient" do
+  supports :restart => true, :status => true, :reload => true
+  action [ :enable, :start]
 end
 
 template "/etc/ddclient.conf" do
   source "ddclient.conf.erb"
   owner "root"
   group "root"
-  mode 0600
-  variables(:ddclient_username => ddclient_secret['username'],
-            :ddclient_password => ddclient_secret['password'])
+  mode "0600"
+  variables(:ddclient_login => ddclient_secret['login'] || node['ddclient']['login'],
+            :ddclient_password => ddclient_secret['password'] || node['ddclient']['password'])
   notifies :restart, "service[ddclient]"
 end
 
-service "ddclient" do
-  supports :status => true, :restart => true
-  action :enable
+template "/etc/default/ddclient" do
+  source "ddclient.erb"
+  owner "root"
+  group "root"
+  mode "0600"
+  notifies :restart, "service[ddclient]"
 end
