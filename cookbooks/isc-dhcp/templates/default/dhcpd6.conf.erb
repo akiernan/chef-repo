@@ -2,13 +2,13 @@
 authoritative;
 <% end %>
 <% if !node["isc-dhcp"]["server6"]["domain-search"].empty? %>
-option dhcp6.domain-search "<%= node["isc-dhcp"]["server6"]["domain-search"].join(",") %>";
+option dhcp6.domain-search <%= node["isc-dhcp"]["server6"]["domain-search"].collect { |it| '"' + it + '"' }.join(", ") %>;
 <% end %>
 <% if !node["isc-dhcp"]["server6"]["name-servers"].empty? %>
-option dhcp6.name-servers <%= node["isc-dhcp"]["server6"]["name-servers"].join(",") %>;
+option dhcp6.name-servers <%= node["isc-dhcp"]["server6"]["name-servers"].join(", ") %>;
 <% end %>
 <% if !node["isc-dhcp"]["server6"]["sntp-servers"].empty? %>
-option dhcp6.sntp-servers <%= node["isc-dhcp"]["server6"]["sntp-servers"].join(",") %>;
+option dhcp6.sntp-servers <%= node["isc-dhcp"]["server6"]["sntp-servers"].join(", ") %>;
 <% end %>
 default-lease-time 1800;
 subnet6 <%= node["isc-dhcp"]["server6"]["prefix"] %> {

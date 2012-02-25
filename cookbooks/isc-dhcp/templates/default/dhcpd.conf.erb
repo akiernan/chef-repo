@@ -2,13 +2,13 @@
 authoritative;
 <% end %>
 <% if !node["isc-dhcp"]["server"]["domain-search"].empty? %>
-option domain-search "<%= node["isc-dhcp"]["server"]["domain-search"].join(",") %>";
+option domain-search <%= node["isc-dhcp"]["server"]["domain-search"].collect { |it| '"' + it + '"' }.join(", ") %>;
 <% end %>
 <% if !node["isc-dhcp"]["server"]["domain-name-servers"].empty? %>
-option domain-name-servers <%= node["isc-dhcp"]["server"]["domain-name-servers"].join(",") %>;
+option domain-name-servers <%= node["isc-dhcp"]["server"]["domain-name-servers"].join(", ") %>;
 <% end %>
 <% if !node["isc-dhcp"]["server"]["ntp-servers"].empty? %>
-option ntp-servers <%= node["isc-dhcp"]["server"]["ntp-servers"].join(",") %>;
+option ntp-servers <%= node["isc-dhcp"]["server"]["ntp-servers"].join(", ") %>;
 <% end %>
 default-lease-time 1800;
 
