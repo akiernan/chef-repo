@@ -18,6 +18,8 @@
 # limitations under the License.
 #
 
+smtp_sasl = Chef::EncryptedDataBagItem.load("secrets", "postfix")
+
 %w{ libsasl2-2  ca-certificates}.each do |pkg|
   package pkg do
     action :install
@@ -34,7 +36,9 @@ template "/etc/postfix/sasl_passwd" do
   owner "root"
   group "root"
   mode 0400
-  notifies :run, resources(:execute => "postmap-sasl_passwd"), :immediately
-  notifies :restart, resources(:service => "postfix")
+  variables(:smtp_sasl_passwd => smtp_sasl['passwd'],
+            :smtp_sasl_user_name => smtp_sasl['user'])
+  notifies :run, "execute[postmap-sasl_passwd]", :immediately
+  notifies :restart, "service[postfix]"
 end
 
