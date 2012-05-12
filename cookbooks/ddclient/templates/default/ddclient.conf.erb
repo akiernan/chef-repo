@@ -5,7 +5,7 @@
 protocol=<%= node[:ddclient][:protocol] %>
 use=<%= node[:ddclient][:use] %>
 server=<%= node[:ddclient][:server] %>
-login=<%= @ddclient_login %>
-password='<%= @ddclient_password %>'
+login=<%= node[:ddclient][:login] %>
+password='<%= node[:ddclient][:password] %>'
 <%= node[:ddclient][:domain] %>
 

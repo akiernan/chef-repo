@@ -4,7 +4,7 @@ Configures ddclient for connecting to DynDNS or other dynamic dns providers supp
 
 REQUIREMENTS
 ============
-Platform with a package named 'ddclient'. Tested with Ubuntu 10.04, 11.10.
+Platform with a package named 'ddclient'. Tested with Ubuntu 10.04.
 
 RECIPES
 =======
@@ -31,22 +31,12 @@ You will need to set the attributes for your DynDNS user, password and domain. C
       }
     )
 
-The login and password may be specified in an encrypted data bag, create a secrets data bag with a ddclient item, populate this with the login and password:
-
-    {
-      "id": "ddclient",
-      "login": "myuser",
-      "password": ""mypassword"
-    }
-
 LICENSE AND AUTHOR
 ==================
 
 Author:: David Ruan (<ruanwz@gmail.com>)
 
 Author:: Matt Ray (<matt@opscode.com>)
-
-Author:: Alex Kiernan (<alexk@alexandalex.com>)
 
 Copyright:: David Ruan (<ruanwz@gmail.com>)
 
